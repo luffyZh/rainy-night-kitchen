@@ -7,14 +7,15 @@ import { exportMenu } from './utils';
 import './App.css';
 
 const MENU_MEAL_MAP = {
-  main: '主菜',
-  half: '半荤菜',
-  vegetable: '素菜',
-  staple: '主食',
+  '01main': '主菜',
+  '02slide': '配菜',
+  '03half': '荤菜',
+  '04vegetable': '素菜',
+  '05staple': '主食',
 }
 
 function App() {
-  const [menuBg, setMenuBg] = useState(MENU_BG.MENU_BG_02);
+  const [menuBg, setMenuBg] = useState(MENU_BG.MENU_BG_03);
   const [update, forceUpdate] = useState();
   const [form] = Form.useForm();
 
@@ -22,6 +23,7 @@ function App() {
 
   const generateMenu = () => {
     forceUpdate(Date.now());
+    console.log(form.getFieldsValue());
   }
 
   return (
@@ -58,28 +60,28 @@ function App() {
                   buttonStyle="solid"
                 />
               </Form.Item>
-              <Form.Item name="main" label="主菜" rules={[{ required: true }]}>
+              <Form.Item name="01main" label={"主菜"} rules={[{ required: true }]}>
                 <Input placeholder='请输入主菜名称' />
               </Form.Item>
               {
                 watchType === 'bento' ? (
-                  <Form.Item name="slide" label="配菜" rules={[{ required: true }]}>
+                  <Form.Item name="02slide" label="配菜" rules={[{ required: true }]}>
                     <Input placeholder='请输入配菜名称' />
                   </Form.Item>
                 ) : (
                   <>
-                    <Form.Item name="half" label="半荤菜" rules={[{ required: true }]}>
-                      <Input placeholder='请输入半荤菜名称' />
+                    <Form.Item name="03half" label="荤菜" rules={[{ required: true }]}>
+                      <Input placeholder='请输入荤菜名称' />
                     </Form.Item>
-                    <Form.Item name="vegetable" label="素菜" rules={[{ required: true }]}>
+                    <Form.Item name="04vegetable" label="素菜" rules={[{ required: true }]}>
                       <Input placeholder='请输入素菜名称' />
-                    </Form.Item>
-                    <Form.Item name="staple" label="主食" rules={[{ required: true }]}>
-                      <Input placeholder='请输入主食名称' />
                     </Form.Item>
                   </>
                 )
               }
+              <Form.Item name="05staple" label="主食" rules={[{ required: true }]}>
+                <Input placeholder='请输入主食名称' />
+              </Form.Item>
             </Form>
           </div>
         </div>
@@ -97,16 +99,27 @@ function App() {
           update && (
             <div className='menu-text-container' style={menuBg.style}>
               {
+                menuBg.key === 'MENU_BG_03' ?
+                  Object.keys(form.getFieldsValue()).filter(key => key !== 'type' && key !== '03half').sort().map(key =>  key === '04vegetable' ? (
+                    <div className='row' key={key}>
+                      {!menuBg.noLabel && <h2>{MENU_MEAL_MAP[key]}</h2>}
+                      <p>{form.getFieldValue('03half')}</p>
+                      <p>{form.getFieldValue(key)}</p>
+                    </div>
+                  ) : (
+                    <div className='row' key={key}>
+                      {!menuBg.noLabel && <h2>{MENU_MEAL_MAP[key]}</h2>}
+                      <p>{form.getFieldValue(key)}</p>
+                    </div>
+                  ))
+                :
                 Object.keys(form.getFieldsValue()).filter(key => key !== 'type').map(key => (
                   <div className='row' key={key}>
-                    <h2>{MENU_MEAL_MAP[key]}</h2>
+                    {!menuBg.noLabel && <h2>{MENU_MEAL_MAP[key]}</h2>}
                     <p>{form.getFieldValue(key)}</p>
                   </div>
                 ))
               }
-              <div className='row'>
-                <h2>主菜</h2>
-              </div>
             </div>
           )
         }

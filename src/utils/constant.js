@@ -25,10 +25,16 @@ export const MENU_BG = {
   MENU_BG_03: {
     key: 'MENU_BG_03',
     image: menuBg03,
+    noLabel: true,
     style: {
-      width: '18vw',
-      right: '20px',
+      width: '11vw',
+      height: '51%',
+      right: '0px',
       top: '40%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'space-around',
     }
   },
   MENU_BG_04: {
