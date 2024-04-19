@@ -70,14 +70,13 @@
 
   .img-container {
     position: relative;
-    width: 30vw;
 
     .menu-text-container {
       position: absolute;
       z-index: 9;
 
       .row {
-        margin-bottom: 12px;
+        position: relative;
 
         p {
           font-size: 1.4rem;
@@ -87,7 +86,7 @@
     }
 
     img {
-      width: 100%;
+      width: 30vw;
     }
   }
 }

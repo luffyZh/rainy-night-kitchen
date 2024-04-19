@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Space, Button, Radio } from 'antd';
 import { ExportOutlined, RestOutlined, FileImageOutlined } from '@ant-design/icons';
 import { Form, Input } from 'antd';
@@ -18,8 +18,16 @@ function App() {
   const [menuBg, setMenuBg] = useState(MENU_BG.MENU_BG_03);
   const [update, forceUpdate] = useState();
   const [form] = Form.useForm();
+  const bgRef = useRef(null);
+  const imgContainerRef = useRef(null);
 
   const watchType = Form.useWatch('type', form);
+  
+  useEffect(() => {
+    if (!bgRef.current || !imgContainerRef.current) return;
+    const bgRect = bgRef.current.getBoundingClientRect();
+    imgContainerRef.current.style.height = `${bgRect.height}px`;
+  }, [menuBg]);
 
   const generateMenu = () => {
     forceUpdate(Date.now());
@@ -41,7 +49,7 @@ function App() {
               layout="vertical"
               form={form}
               name="menu-form"
-              initialValues={{ type: 'boxed-meal', staple: '米饭、馒头' }}
+              initialValues={{ type: 'boxed-meal', '05staple': '米饭、馒头' }}
             >
               <Form.Item name="type" label="菜单类型" rules={[{ required: true }]}>
                 <Radio.Group
@@ -94,7 +102,7 @@ function App() {
         </footer>
       </div>
       <div className='right-container'>
-        <div className='img-container'>
+        <div ref={imgContainerRef} className='img-container'>
         {
           update && (
             <div className='menu-text-container' style={menuBg.style}>
@@ -107,14 +115,17 @@ function App() {
                       <p>{form.getFieldValue(key)}</p>
                     </div>
                   ) : (
-                    <div className='row' key={key}>
+                    <div style={{ marginBottom: '-10px' }} className='row' key={key}>
                       {!menuBg.noLabel && <h2>{MENU_MEAL_MAP[key]}</h2>}
                       <p>{form.getFieldValue(key)}</p>
                     </div>
                   ))
                 :
                 Object.keys(form.getFieldsValue()).filter(key => key !== 'type').map(key => (
-                  <div className='row' key={key}>
+                  <div
+                    className='row'
+                    key={key}
+                  >
                     {!menuBg.noLabel && <h2>{MENU_MEAL_MAP[key]}</h2>}
                     <p>{form.getFieldValue(key)}</p>
                   </div>
@@ -123,7 +134,7 @@ function App() {
             </div>
           )
         }
-          <img alt="menu-bg" src={menuBg.image} />
+          <img ref={bgRef} alt="menu-bg" src={menuBg.image} />
         </div>
       </div>
     </div>
