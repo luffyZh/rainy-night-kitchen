@@ -29,6 +29,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
+      border-bottom: 1px solid var(--color-border);
 
       .card-img {
         width: 180px;
@@ -36,8 +37,17 @@
         cursor: pointer;
 
         &.active {
-          border: 6px solid var(--color-primary);        }
+          border: 6px solid var(--color-primary);
+        }
       }
+    }
+  }
+
+  .form-container {
+    padding: 20px;
+
+    h2 {
+      margin-bottom: 20px;
     }
   }
 
@@ -59,7 +69,16 @@
 
   .img-container {
     position: relative;
-    max-width: 30vw;
+    width: 30vw;
+
+    .menu-text-container {
+      position: absolute;
+      z-index: 9;
+
+      .row {
+        margin-bottom: 12px;
+      }
+    }
 
     img {
       width: 100%;

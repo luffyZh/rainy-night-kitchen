@@ -7,21 +7,37 @@ export const MENU_BG = {
   MENU_BG_01: {
     key: 'MENU_BG_01',
     image: menuBg01,
-    config: {},
+    style: {
+      width: '18vw',
+      right: '20px',
+      top: '40%',
+    }
   },
   MENU_BG_02: {
     key: 'MENU_BG_02',
     image: menuBg02,
-    config: {},
+    style: {
+      width: '17vw',
+      right: '20px',
+      top: '40%',
+    }
   },
   MENU_BG_03: {
     key: 'MENU_BG_03',
     image: menuBg03,
-    config: {},
+    style: {
+      width: '18vw',
+      right: '20px',
+      top: '40%',
+    }
   },
   MENU_BG_04: {
     key: 'MENU_BG_04',
     image: menuBg04,
-    config: {},
+    style: {
+      width: '18vw',
+      right: '20px',
+      top: '40%',
+    }
   },
 }

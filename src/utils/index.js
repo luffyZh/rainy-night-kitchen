@@ -7,7 +7,9 @@ import html2canvas from 'html2canvas';
  */
 export function exportMenu() {
   const menuContainer = document.querySelector('.img-container');
-  html2canvas(menuContainer).then(canvas => {
+  html2canvas(menuContainer, {
+    scale: 2,
+  }).then(canvas => {
     const url = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = url;
