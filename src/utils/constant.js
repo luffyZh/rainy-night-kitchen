@@ -31,6 +31,7 @@ export const MENU_BG = {
       height: '51%',
       right: '0px',
       top: '40%',
+      padding: '14px 0',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
