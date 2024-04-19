@@ -6,11 +6,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --color-primary: #873bf4;
+  --color-primary: #389e0d;
   --color-border-primary:  #873bf4;
   --color-active-primary: #6727cf;
   --color-hover-primary: #ab66ff;
   --color-bg-primary: #f9f0ff;
+  --color-border: #f6f6f6;
   --color-secondary: #6c757d;
   --color-success: #28a745;
   --color-danger: #dc3545;
