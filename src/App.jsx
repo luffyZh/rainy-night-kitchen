@@ -25,13 +25,15 @@ function App() {
   
   useEffect(() => {
     if (!bgRef.current || !imgContainerRef.current) return;
-    const bgRect = bgRef.current.getBoundingClientRect();
-    imgContainerRef.current.style.height = `${bgRect.height}px`;
+    setTimeout(() => {
+      const bgRect = bgRef.current.getBoundingClientRect();
+      imgContainerRef.current.style.height = `${bgRect.height - 1}px`;
+      imgContainerRef.current.style.width = `${bgRect.width - 1}px`;
+    }, 3000);
   }, [menuBg]);
 
   const generateMenu = () => {
     forceUpdate(Date.now());
-    console.log(form.getFieldsValue());
   }
 
   return (
